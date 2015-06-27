@@ -1,0 +1,2 @@
+# eventmeet
+Rails Class Project
