@@ -17,15 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, rows: 6 %>
   </div>
   <div class="field">
-    <%= f.label :loc_city %><br>
+    <%= f.label :loc_city, 'City' %><br>
     <%= f.text_field :loc_city %>
-  </div>
-  <div class="field">
-    <%= f.label :event_code %><br>
-    <%= f.text_field :event_code %>
   </div>
   <div class="field">
     <%= f.label :visibility %><br>
