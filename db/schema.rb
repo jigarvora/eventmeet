@@ -13,6 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150627215248) do
 
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "loc_city"
+    t.string   "event_code"
+    t.integer  "visibility"
+    t.date     "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
