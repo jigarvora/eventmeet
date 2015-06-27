@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  loc_city: MyString
+  event_code: MyString
+  visibility: 1
+  date: 2015-06-27
+
+two:
+  title: MyString
+  description: MyText
+  loc_city: MyString
+  event_code: MyString
+  visibility: 1
+  date: 2015-06-27
