@@ -1,0 +1,32 @@
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Loc city:</strong>
+  <%= @event.loc_city %>
+</p>
+
+<p>
+  <strong>Event code:</strong>
+  <%= @event.event_code %>
+</p>
+
+<p>
+  <strong>Visibility:</strong>
+  <%= @event.visibility %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
