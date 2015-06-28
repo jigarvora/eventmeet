@@ -24,10 +24,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-
+    @user = User.find(current_user.id)
+    
+    @event = current_user.events.build(event_params)
+    @event.user_id = current_user.id
     respond_to do |format|
       if @event.save
+        #Saving the record in the join table
+        @user.events << @event
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -60,7 +64,22 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  
+  def join
+    puts 'in join'
+    @user = User.find(current_user.id)
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      if @user.events << @event
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -69,6 +88,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :loc_city, :event_code, :visibility, :date)
+      params.require(:event).permit(:title, :description, :loc_city, :event_code, :visibility, :date, :user_id)
     end
 end

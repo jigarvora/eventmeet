@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /users
   # GET /users.json
   def index
-    puts current_user.email
+    puts 'in here'
+    @event_owner = Event.all.where("user_id = ?",current_user.id)
+    @titles = current_user.events.all
+    
+    
     @users = User.all
   end
 
