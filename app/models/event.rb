@@ -15,5 +15,6 @@
 #
 
 class Event < ActiveRecord::Base
+  EVENT_TYPES = [ "Public", "Private" ]
   has_and_belongs_to_many :users
 end
