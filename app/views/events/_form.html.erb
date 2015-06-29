@@ -24,8 +24,9 @@
     <%= f.text_field :loc_city %>
   </div>
   <div class="field">
-    <%= f.label :visibility %><br>
-    <%= f.number_field :visibility %>
+    <%= f.label :visibility, 'Type' %><br>
+    <%= f.select :visibility, Event::EVENT_TYPES,
+                  prompt: 'Select the event type' %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
