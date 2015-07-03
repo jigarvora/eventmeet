@@ -18,8 +18,7 @@ class Event < ActiveRecord::Base
   EVENT_TYPES = [ "Public", "Private" ]
   has_and_belongs_to_many :users
 
-  validates :visibility, inclusion: EVENT_TYPES
   validates :title, :date, :loc_city, presence: true
-  validates :hashcode, uniqueness: true
+  validates :hashcode, uniqueness: {message: "Event already exists" }
 
 end

@@ -1,6 +1,17 @@
  <p>
-   Event Successfully Created! Event invitation code: <strong><%= @event.id %></
+   Event invitation code: <strong><%= @event.id %> </strong>
  </p>
+
+<p> <strong>
+   Current Attendees:
+   </strong>
+</p>
+
+<% for user in @event.users %>
+<p>
+<%= user.name %>
+</p>
+<% end %>
 
 <%= link_to 'Edit Event', edit_event_path(@event) %> |
 <%= link_to 'Home', user_path(@user) %>
