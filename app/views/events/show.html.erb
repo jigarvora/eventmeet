@@ -1,32 +1,17 @@
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
+ <p>
+   Event invitation code: <strong><%= @event.id %> </strong>
+ </p>
+
+<p> <strong>
+   Current Attendees:
+   </strong>
 </p>
 
+<% for user in @event.users %>
 <p>
-  <strong>Description:</strong>
-  <%= @event.description %>
+<%= user.name %>
 </p>
+<% end %>
 
-<p>
-  <strong>Loc city:</strong>
-  <%= @event.loc_city %>
-</p>
-
-<p>
-  <strong>Event code:</strong>
-  <%= @event.event_code %>
-</p>
-
-<p>
-  <strong>Visibility:</strong>
-  <%= @event.visibility %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit Event', edit_event_path(@event) %> |
+<%= link_to 'Home', user_path(@user) %>

@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
+  include CurrentUser
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:create, :show]
 
   # GET /events
   # GET /events.json
@@ -24,10 +26,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @user = User.find(current_user.id)
-    
     @event = current_user.events.build(event_params)
-    @event.user_id = current_user.id
+    @event.user_id = @user.id
+    @event.hashcode = (@event.title + @event.loc_city + @event.date.to_s).hash
     respond_to do |format|
       if @event.save
         #Saving the record in the join table
