@@ -20,7 +20,6 @@
         <td><%= event.title %></td>
         <td><%= event.description %></td>
         <td><%= event.loc_city %></td>
-        <td><%= event.event_code %></td>
         <td><%= event.date %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Join', event_join_path(event), method: :post %></td>
@@ -32,3 +31,5 @@
 <br>
 
 <%= link_to 'New Event', new_event_path %>
+<p><%= link_to 'Home', users_path %></p>
+
