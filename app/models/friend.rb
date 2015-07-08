@@ -11,6 +11,11 @@
 
 class Friend < ActiveRecord::Base
   belongs_to :user
-  scope :all_except, ->(user) { where(["id NOT IN (?)", ([Friend.map(&:friend_id) << user.user_id]) ]) }
+  
+  
+  
+  def self.all_except(users)
+    where.not(id: users)
+  end
 
 end

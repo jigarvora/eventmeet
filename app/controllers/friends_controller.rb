@@ -1,17 +1,17 @@
 class FriendsController < ApplicationController
+  include CurrentUser
   before_action :set_friend, only: [:show, :edit, :update, :destroy]
 
   # GET /friends
   # GET /friends.json
   def index
-    
-    if params[:flags] == 'all'
-      #All friends
-      @users = Friend.all_except(current_user)
-    else
-       #My friends
-       @friends = Friend.all.where("user_id = ?",current_user.id)
+    @friends = Friend.all.where("user_id = ?",current_user.id)
+    array_friends = []
+    array_friends.append(current_user.id)
+    @friends.each do |friend|
+      array_friends.append(friend.friend_id)
     end
+    @new_friends = User.all.where.not(id: array_friends)
   end
 
   # GET /friends/1
@@ -21,6 +21,7 @@ class FriendsController < ApplicationController
 
   # GET /friends/new
   def new
+    
     @friend = Friend.new
   end
 
@@ -31,11 +32,21 @@ class FriendsController < ApplicationController
   # POST /friends
   # POST /friends.json
   def create
-    @friend = Friend.new(friend_params)
-
+    puts params
+    #@new_friends = current_user.friends.build(params)
+    @new_friends = Friend.new
+    @new_friends1 = Friend.new
+    @new_friends.user_id = current_user.id
+    @new_friends.friend_id = friend_params[:friend_id]
+    @new_friends.friend_email = friend_params[:friend_email]
+    
+    @new_friends1.user_id = friend_params[:friend_id]
+    @new_friends1.friend_id = current_user.id
+    @new_friends1.friend_email = current_user.email
+    
     respond_to do |format|
-      if @friend.save
-        format.html { redirect_to @friend, notice: 'Friend was successfully created.' }
+      if @new_friends.save and @new_friends1.save
+        format.html { redirect_to friends_path, notice: 'Friend was successfully Added.' }
         format.json { render :show, status: :created, location: @friend }
       else
         format.html { render :new }
@@ -61,7 +72,7 @@ class FriendsController < ApplicationController
   # DELETE /friends/1
   # DELETE /friends/1.json
   def destroy
-    @friend.destroy
+    @friend.destroy 
     respond_to do |format|
       format.html { redirect_to friends_url, notice: 'Friend was successfully destroyed.' }
       format.json { head :no_content }
@@ -76,6 +87,6 @@ class FriendsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def friend_params
-      params.require(:friend).permit(:friend_id, :user_id)
+      params.permit(:friend_id,:friend_email)
     end
 end
