@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+	<h1>Your friends</h1>
+	
+	<table class='table table-bordered'>
+	  <thead>
+	    <tr>
+	      <th>Users</th>
+	      <th>Action</th>
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @friends.each do |friend| %>
+	      <tr>
+	        <td><%= friend.friend_email %></td>
+	        <td><%= link_to 'Destroy', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<h1>Add new friends</h1>
+	
+	<table class='table table-bordered'>
+	  <thead>
+	    <tr>
+	      <th>Friend</th>
+	      <th>Action</th>
+	      
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @new_friends.each do |new_friend| %>
+	      <tr>
+	        <td><%= new_friend.email %></td>
+	        <td><%= link_to 'Add', friends_path(friend_email: new_friend.email, friend_id: new_friend.id), method: :post %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+

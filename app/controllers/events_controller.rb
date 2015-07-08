@@ -68,7 +68,6 @@ class EventsController < ApplicationController
   
   
   def join
-    puts 'in join'
     @user = User.find(current_user.id)
     @event = Event.find(params[:id])
     respond_to do |format|
