@@ -13,5 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets"
-@import "bootstrap"
+  @import "bootswatch/cosmo/_variables";
+  @import "bootstrap-sprockets";
+  @import "bootstrap";
+  @import "bootswatch/cosmo/_bootswatch";
